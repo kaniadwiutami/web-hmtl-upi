@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HMTL FPTI UPI - Let's Connect</title>
+    
+    <!-- Font: Montserrat & Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Ikon FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #155d6a;
+            --bg-body: #f2f1f1;
+            --white: #ffffff;
+            --text-dark: #333333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Background polos dan setting kursor */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 30px 20px;
+            overflow-x: hidden;
+        }
+
+        /* --- 1. CUSTOM CURSOR --- */
+        .cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--primary);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.1s ease-out, background-color 0.3s;
+        }
+        .cursor-dot {
+            width: 6px;
+            height: 6px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.05s ease-out;
+        }
+        @media (hover: none) and (pointer: coarse) {
+            .cursor, .cursor-dot { display: none; }
+        }
+
+        /* Kotak Utama */
+        .container {
+            background-color: var(--white);
+            width: 100%;
+            max-width: 480px;
+            border-radius: 25px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            position: relative;
+            animation: fadeIn 0.8s ease-out, glowPulse 4s infinite alternate;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- 2. GLOWING CARD --- */
+        @keyframes glowPulse {
+            0% { box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08); }
+            100% { box-shadow: 0 15px 50px rgba(21, 93, 106, 0.2); }
+        }
+
+        /* Cover Image (FOTO SUDAH DIGANTI) */
+        .cover-photo {
+            width: 100%;
+            height: 200px;
+            background-color: #d1d5db;
+            background-image: url('foto-kepengurusan.png'); /* NAMA FILE FOTO KAMU */
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        /* --- 3. FLOATING LOGO --- */
+        .logo-container {
+            position: absolute;
+            top: 130px;
+            left: 50%;
+            margin-left: -65px;
+            width: 130px;
+            height: 130px;
+            background-color: var(--white);
+            border-radius: 50%;
+            border: 5px solid var(--white);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            z-index: 10;
+            animation: floatLogo 4s ease-in-out infinite;
+        }
+
+        @keyframes floatLogo {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .logo-container img {
+            width: 85%;
+            height: 85%;
+            object-fit: contain;
+        }
+
+        /* Judul */
+        .header-info {
+            text-align: center;
+            margin-top: 80px;
+            padding: 0 20px;
+            min-height: 70px;
+        }
+
+        .header-info h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 28px;
+            color: var(--primary);
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        /* --- 4. TYPING EFFECT TEXT --- */
+        .header-info p {
+            font-size: 14px;
+            color: #666;
+            font-weight: 500;
+            display: inline-block;
+        }
+
+        .typing-text::after {
+            content: '|';
+            animation: blink 1s step-start infinite;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+
+        /* Bagian Link */
+        .links-section {
+            padding: 30px 25px 40px 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .link-btn {
+            display: flex;
+            align-items: center;
+            background-color: var(--bg-body);
+            color: var(--primary);
+            text-decoration: none;
+            padding: 15px 20px;
+            border-radius: 15px;
+            font-weight: 600;
+            font-size: 15px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        /* --- 5. SHIMMER EFFECT ON HOVER --- */
+        .link-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%);
+            transform: skewX(-25deg);
+            transition: all 0.5s;
+        }
+
+        .link-btn:hover::before {
+            left: 150%;
+        }
+
+        .link-btn i {
+            font-size: 20px;
+            width: 40px;
+            text-align: center;
+            margin-right: 10px;
+            transition: transform 0.3s;
+        }
+
+        .link-btn:hover {
+            background-color: var(--primary);
+            color: var(--white);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(21, 93, 106, 0.25);
+        }
+
+        .link-btn:hover i {
+            transform: scale(1.2) rotate(5deg);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding-bottom: 25px;
+            font-size: 12px;
+            color: #888;
+        }
+
+        @media (max-width: 480px) {
+            .cover-photo { height: 160px; }
+            .logo-container { width: 110px; height: 110px; top: 105px; margin-left: -55px; }
+            .header-info { margin-top: 65px; }
+            .header-info h1 { font-size: 24px; }
+            .link-btn { padding: 12px 15px; font-size: 14px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Kursor Custom -->
+    <div class="cursor"></div>
+    <div class="cursor-dot"></div>
+
+    <div class="container">
+        <div class="cover-photo"></div>
+        
+        <div class="logo-container">
+            <!-- GANTI NAMA FILE LOGO KAMU DI SINI -->
+            <img src="logo-hmtl.png" alt="Logo HMTL">
+        </div>
+
+        <div class="header-info">
+            <h1>HMTL FPTI UPI</h1>
+            <p><span class="typing-text" id="typing-text"></span></p>
+        </div>
+
+        <div class="links-section">
+            <!-- LINK 1: WHATSAPP (Contact Person) -->
+            <a href="https://wa.me/6285710366255" class="link-btn" target="_blank">
+                <i class="fab fa-whatsapp"></i> <span>Contact Person Eksternal</span>
+            </a>
+            
+            <!-- LINK 2: GOOGLE FORMS (Media Partner) -->
+            <a href="https://forms.gle/RsxV3qrchudZqKSM6" class="link-btn" target="_blank">
+                <i class="fas fa-file-signature"></i> <span>Pengajuan Media Partner</span>
+            </a>
+            
+            <!-- LINK 3: LINKEDIN -->
+            <a href="https://www.linkedin.com/company/bem-hmtl-upi/" class="link-btn" target="_blank">
+                <i class="fab fa-linkedin"></i> <span>LinkedIn BEM HMTL UPI</span>
+            </a>
+            
+            <!-- LINK 4: TIKTOK -->
+            <a href="https://www.tiktok.com/@hmtlfptiupi?_r=1&_t=ZS-9AqCn2h3nhx" class="link-btn" target="_blank">
+                <i class="fab fa-tiktok"></i> <span>TikTok HMTL UPI</span>
+            </a>
+            
+            <!-- LINK 5: YOUTUBE -->
+            <a href="https://youtube.com/@hmtlfptiupi?si=Xi4lyL3mW4ui2QAz" class="link-btn" target="_blank">
+                <i class="fab fa-youtube"></i> <span>YouTube HMTL UPI</span>
+            </a>
+        </div>
+
+        <div class="footer">
+            <p>&copy; 2026 HMTL FPTI UPI. All Rights Reserved.</p>
+        </div>
+    </div>
+
+    <!-- SCRIPT UNTUK FITUR CANGGIH -->
+    <script>
+        // 1. SCRIPT CUSTOM CURSOR
+        const cursor = document.querySelector('.cursor');
+        const cursorDot = document.querySelector('.cursor-dot');
+
+        document.addEventListener('mousemove', (e) => {
+            const posX = e.clientX;
+            const posY = e.clientY;
+
+            cursorDot.style.left = `${posX}px`;
+            cursorDot.style.top = `${posY}px`;
+
+            cursor.animate({
+                left: `${posX}px`,
+                top: `${posY}px`
+            }, { duration: 400, fill: "forwards" });
+        });
+
+        const links = document.querySelectorAll('.link-btn');
+        links.forEach(link => {
+            link.addEventListener('mouseenter', () => {
+                cursor.style.transform = 'scale(1.5)';
+                cursor.style.backgroundColor = 'rgba(21, 93, 106, 0.1)';
+            });
+            link.addEventListener('mouseleave', () => {
+                cursor.style.transform = 'scale(1)';
+                cursor.style.backgroundColor = 'transparent';
+            });
+        });
+
+        // 2. SCRIPT TYPING EFFECT
+        const textToType = "Let's Connect With Us!";
+        const typingElement = document.getElementById('typing-text');
+        let i = 0;
+
+        function typeWriter() {
+            if (i < textToType.length) {
+                typingElement.innerHTML += textToType.charAt(i);
+                i++;
+                setTimeout(typeWriter, 100);
+            }
+        }
+
+        window.addEventListener('load', () => {
+            setTimeout(typeWriter, 500);
+        });
+    </script>
+</body>
+</html>
